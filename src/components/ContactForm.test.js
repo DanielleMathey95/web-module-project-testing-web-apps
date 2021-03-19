@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen, waitFor } from '@testing-library/react';
+import {render, screen, wait, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import ContactForm from './ContactForm';
@@ -64,7 +64,13 @@ test('renders ONE error message if user enters a valid first name and last name 
 });
 
 test('renders "email must be a valid email address" if an invalid email is entered', async () => {
-    
+    render(<ContactForm />)
+
+    userEvent.type(emailInput(), 'email')
+
+    await waitFor(() => {
+      expect(errors()[0]).toHaveTextContent(/email must be a valid email address/i)
+    })
 });
 
 test('renders "lastName is a required field" if an last name is not entered and the submit button is clicked', async () => {
