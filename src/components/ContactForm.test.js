@@ -4,8 +4,24 @@ import userEvent from '@testing-library/user-event';
 
 import ContactForm from './ContactForm';
 
+//Inputs
+const firstnameInput = () => screen.getByLabelText(/first name/i)
+const lastnameInput = () => screen.getByLabelText(/last name/i)
+const emailInput = () => screen.getByLabelText(/email/i)
+const messageInput = () => screen.getByLabelText(/message/i)
+const submit = () => screen.getByRole('button')
+
+//Displays
+const firstnameDisplay = () => screen.queryByTestId('firstnameDisplay')
+const lastnameDisplay = () => screen.queryByTestId('lastnameDisplay')
+const emailDisplay = () => screen.queryByTestId('emailDisplay')
+const messageDisplay = () => screen.queryByTestId('messageDisplay')
+
+//Errors
+const errors = () => screen.queryAllByTestId('error')
+
 test('renders without errors', ()=>{
-    
+    render(<ContactForm />)
 });
 
 test('renders the contact form header', ()=> {
