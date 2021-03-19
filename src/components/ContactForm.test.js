@@ -52,7 +52,15 @@ test('renders THREE error messages if user enters no values into any fields.', a
 });
 
 test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
-    
+    render(<ContactForm />)
+
+    userEvent.type(firstnameInput(), 'Danielle')
+    userEvent.type(lastnameInput(), 'Mathey')
+    userEvent.click(submit())
+
+    await waitFor(() => {
+      expect(errors()).toHaveLength(1)
+    })
 });
 
 test('renders "email must be a valid email address" if an invalid email is entered', async () => {
