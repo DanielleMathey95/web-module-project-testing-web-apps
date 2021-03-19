@@ -43,7 +43,12 @@ test('renders ONE error message if user enters less then 5 characters into first
 });
 
 test('renders THREE error messages if user enters no values into any fields.', async () => {
-    
+    render(<ContactForm />)
+    userEvent.click(submit())
+
+    await waitFor(() => {
+      expect(errors()).toHaveLength(3)
+    })
 });
 
 test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
